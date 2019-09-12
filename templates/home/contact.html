@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block meta_links %}
+{% endblock %}
+{% block style_links %}
+
+{% endblock %}
+
+{% block title %}
+Contact
+{% endblock %}
+{% block content %}
+
+<div class="container">
+    <p>This is contact page</p>
+</div>
+
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+
+            <form method="POST" action="" accept-charset="utf-8">
+                <!--enctype="multipart/form-data" for multimedia entry like image-->
+                {% csrf_token %}
+                <!--djanjo security purpose-->
+                <div class="form-group">
+                    <label for="exampleInputEmail">Name*</label>
+                    <input type="text" class="form-control" name="full_name" id="exampleInputEmail"
+                        aria-describedby="emailHelp" placeholder="Enter Full Name">
+                    <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail">Email*</label>
+                    <input type="email1" class="form-control" name="email" id="exampleInputEmail"
+                        aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">we'll never share your e-mail to anyone else.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputMessage">Message*</label>
+                    <input type="textarea" class="form-control" name="message" placeholder="Type your message">
+                    <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
+                </div>
+
+                <div class="from-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label for="form-check-label" for="exampleCheck1">Check me out</label>
+
+                </div>
+                <button type="submit" class="btn btn-block btn-danger mt-4">Send</button>
+            </form>
+            {% if messages %}
+            {% for message in messages %}
+
+            <div class="alert alert-primary" role="alert">
+                {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script_links %}
+{% endblock %}
+{% block scripts %}
+{% endblock %}

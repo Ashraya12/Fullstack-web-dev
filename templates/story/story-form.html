@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block meta_links %}
+{% endblock %}
+{% block style_links %}
+
+{% endblock %}
+
+{% block title %}
+My Story
+{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>Create Story</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form method="POST" action="" accept-charset="utf-8" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- cross site request forgery -->
+                <div class="form-group">
+
+
+                    <div>
+
+
+                        <label class="required" for="id_title">Title:</label>
+
+                        <input type="text" name="title" class="vTextField" maxlength="200" required id="id_title">
+
+
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+
+                    <div>
+
+
+                        <label for="id_slug">Slug:</label>
+
+                        <input type="text" name="slug" class="vTextField" maxlength="50" id="id_slug">
+
+
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+
+                    <div>
+
+
+                        <label class="required" for="id_tag">Tag:</label>
+
+                        <div class="related-widget-wrapper">
+                            <select name="tag" required id="id_tag">
+                                {% for tag in tag_list %}
+                                <option value="{{tag.id}}">
+                                    {{tag.name}}</option>
+                                {% endfor %}
+
+                            </select>
+
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+
+                    <div>
+
+
+                        <label class="required" for="id_photographer">Photographer:</label>
+
+                        <div class="related-widget-wrapper">
+                            <select name="photographer" required id="id_photographer">
+                                <option value="" selected>---------</option>
+
+                                <option value="1">ashraya</option>
+
+                            </select>
+
+                            <a class="related-widget-wrapper-link change-related" id="change_id_photographer"
+                                data-href-template="/admin/auth/user/__fk__/change/?_to_field=id&amp;_popup=1"
+                                title="Change selected user"><img src="/static/admin/img/icon-changelink.svg"
+                                    alt="Change"></a><a class="related-widget-wrapper-link add-related"
+                                id="add_id_photographer" href="/admin/auth/user/add/?_to_field=id&amp;_popup=1"
+                                title="Add another user"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+
+                    <div>
+
+
+                        <label class="required" for="id_image">Image:</label>
+
+                        <input type="file" name="image" accept="image/*" id="id_image">
+
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+
+                    <div>
+
+
+                        <label class="required" for="id_content">Content:</label>
+
+                        <div class="django-ckeditor-widget" data-field-id="id_content" style="display: inline-block;">
+                            <textarea cols="40" id="id_content" name="content" rows="10" required data-processed="0"
+                                data-config="{&quot;skin&quot;: &quot;moono&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;YourCustomToolbarConfig&quot;, &quot;height&quot;: 291, &quot;width&quot;: 835, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;toolbar_YourCustomToolbarConfig&quot;: [{&quot;name&quot;: &quot;document&quot;, &quot;items&quot;: [&quot;Source&quot;, &quot;-&quot;, &quot;Preview&quot;, &quot;Print&quot;, &quot;-&quot;, &quot;Templates&quot;]}, {&quot;name&quot;: &quot;clipboard&quot;, &quot;items&quot;: [&quot;Cut&quot;, &quot;Copy&quot;, &quot;Paste&quot;, &quot;PasteText&quot;, &quot;PasteFromWord&quot;, &quot;-&quot;, &quot;Undo&quot;, &quot;Redo&quot;]}, {&quot;name&quot;: &quot;paragraph&quot;, &quot;items&quot;: [&quot;NumberedList&quot;, &quot;BulletedList&quot;, &quot;-&quot;, &quot;Outdent&quot;, &quot;Indent&quot;, &quot;-&quot;, &quot;Blockquote&quot;, &quot;CreateDiv&quot;, &quot;-&quot;, &quot;JustifyLeft&quot;, &quot;JustifyCenter&quot;, &quot;JustifyRight&quot;, &quot;JustifyBlock&quot;, &quot;-&quot;, &quot;BidiLtr&quot;, &quot;BidiRtl&quot;, &quot;Language&quot;]}, &quot;/&quot;, {&quot;name&quot;: &quot;basicstyles&quot;, &quot;items&quot;: [&quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;Subscript&quot;, &quot;Superscript&quot;, &quot;-&quot;, &quot;RemoveFormat&quot;]}, {&quot;name&quot;: &quot;insert&quot;, &quot;items&quot;: [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;, &quot;Smiley&quot;, &quot;SpecialChar&quot;, &quot;PageBreak&quot;, &quot;Iframe&quot;]}, {&quot;name&quot;: &quot;styles&quot;, &quot;items&quot;: [&quot;Styles&quot;, &quot;Format&quot;, &quot;Font&quot;, &quot;FontSize&quot;]}, &quot;/&quot;, {&quot;name&quot;: &quot;links&quot;, &quot;items&quot;: [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;]}, {&quot;name&quot;: &quot;colors&quot;, &quot;items&quot;: [&quot;TextColor&quot;, &quot;BGColor&quot;]}, {&quot;name&quot;: &quot;tools&quot;, &quot;items&quot;: [&quot;Maximize&quot;, &quot;ShowBlocks&quot;]}], &quot;tabSpaces&quot;: 4, &quot;extraPlugins&quot;: &quot;uploadimage,div,autolink,autoembed,embedsemantic,autogrow,widget,lineutils,clipboard,dialog,dialogui,elementspath,uploadimage,filebrowser&quot;, &quot;filebrowserUploadUrl&quot;: &quot;/ckeditor/upload/&quot;, &quot;filebrowserBrowseUrl&quot;: &quot;/ckeditor/browse/&quot;, &quot;language&quot;: &quot;en-us&quot;}"
+                                data-external-plugin-resources="[]" data-id="id_content"
+                                data-type="ckeditortype"></textarea>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-primary" role="alert">
+                {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
+
+{% block script_links %}
+{% endblock %}
+{% block scripts %}
+{% endblock %}

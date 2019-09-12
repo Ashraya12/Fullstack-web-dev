@@ -1,0 +1,23 @@
+.tag-name{
+    cursor: pointer;
+    transition: all ease-in-out 0.2s;
+}
+
+.tag-name:hover{
+    transform: translate(5px);
+
+}
+
+.tag-name::before{
+    content: ">";
+    margin-right: 5px;
+} 
+
+.story-card{
+    transition: all ease-in-out 0.2s;
+
+}
+
+.story-card:hover{
+    transform: scale(1.01);
+}

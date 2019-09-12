@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta_links %}
+{% endblock %}
+{% block style_links %}
+{% endblock %}
+
+
+{% block title %}
+HERO
+{% endblock %}
+
+{% block content%}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>Create Hero</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form method="POST" action="" accept-charset="utf-8" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- cross site request forgery -->
+                <div class="form-group">
+                    <!-- <img src="{{instance.image.url}}"> -->
+                    <label for="address">Add image</label>
+                    <input type="file" value="{% if from.image.value %}{{ form.image.value }}{% endif %}" name="image"
+                        class="form-control" id="id_image" placeholder="upload the image">
+                </div>
+                <div class="my-2 image-holder">
+                    <img id="image_holder" src="{% if instance %}{{instance.image.url}} {%  endif %}"
+                        style="height: 50px;" alt="{{instance.caption}}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Caption</label>
+                    <input type="text" value="{% if form.caption.value %}{{ form.caption.value }}{% endif %}"
+                        name="caption" class="form-control" id="exampleInputPassword1" placeholder="Enter the caption">
+                </div>
+                <div class="form-group">
+                    <label for="phone number">Sub heading</label>
+                    <input type="text" value="{% if form.sub_heading.value %}{{ form.sub_heading.value }}{% endif %}"
+                        name="sub_heading" class="form-control" id="exampleInputPassword1"
+                        placeholder="Enter the sub heading">
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-primary" role="alert">
+                {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock%}
+
+{% block  script_link %}
+{% endblock %}
+{% block scripts %}
+<script>
+    $(document).ready(function () {        //watch yourself on GOOGLE
+        $('#id_image').on('change', function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#image_holder').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        })
+    });
+</script>
+
+{% endblock %}
